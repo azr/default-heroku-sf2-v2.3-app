@@ -1,0 +1,63 @@
+# This is the forecastic_default parameter file. 
+# To change parameters, edit the parameters.yml file that will overwrite them.
+# These parameters can be imported into other config files
+# by enclosing the key with % (like %database_user%)
+
+parameters:
+    app_name            : Sf2 Application
+
+#sql
+    database_driver     : pdo_mysql
+    database_host       : localhost
+    database_port       : ~
+    database_name       : sf_app
+    database_user       : sf_root
+    database_password   : sf_prout
+
+#mail
+    mailer_transport    : smtp
+    mailer_host         : localhost
+    mailer_port         : ~
+    mailer_user         : ~
+    mailer_password     : ~
+
+#server
+    domain              : sf2.dev
+    mail_domain         : sf2.dev
+    secret              : ThisTokenNotSoSecretChangeIt
+    locale              : en
+
+#New relic
+    new_relic_license   : ~
+
+#Google Analytics
+    ga_trackers:
+        default:
+            name:      ~
+            accountId: ~
+            domain:    %domain%
+            trackPageLoadTime: true
+
+#Bucket
+    sonata_media_fs     : s3
+    bucket_name         : ~
+    bucket_access_key   : ~
+    bucket_secret_key   : ~
+    bucket_url          : ~
+
+#media
+    sonata_media_fs   : local #if local then no need for bucket conf
+    sonata_media_cdn  : /uploads/media
+
+#Mongo Db
+    mongodb_connections:
+      default:
+        server: mongodb://localhost:27017
+        options:
+          connect: true
+
+    mongodb_document_managers:
+      default:
+        database:       %database_name%
+        auto_mapping:   true
+        connection:     default

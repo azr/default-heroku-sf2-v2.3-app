@@ -1,0 +1,29 @@
+{% from 'MopaBootstrapBundle::flash.html.twig' import session_flash %}  
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta content="" name="description">
+        <meta content="" name="author">
+        {% include "GoogleBundle:Analytics:async.html.twig" %}
+
+        <title>{% block title "Title" %}</title>
+
+        {% block head_style %}
+        {#% stylesheets filter='cssrewrite'
+            '@BUNDLE/Resources/public/less/NAME.less'
+            output="less/NAME.css"
+        %}
+        <link href="{{ asset_url }}" type="text/css" rel="stylesheet" />
+        {% endstylesheets %#}
+        {% endblock head_style %}
+    <link href="{{asset('/vendor/font-awesome/css/font-awesome.min.css')}}" type="text/css" rel="stylesheet" />
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+            <!--[if lt IE 9]>
+            <script src="../../assets/js/html5shiv.js"></script>
+            <script src="../../assets/js/respond.min.js"></script>
+            <![endif]-->
+    </head>
+    <body></body>
+</html>

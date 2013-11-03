@@ -1,0 +1,25 @@
+fos_user:
+    db_driver: mongodb
+    firewall_name: main
+    user_class: FOS\UserBundle\Document\User
+
+fos_rest:
+    param_fetcher_listener: true
+    view:
+        view_response_listener: true
+        # formats:
+        #     rss: true
+        #     json: true
+        #     xml: true
+        templating_formats:
+            html: true
+        force_redirects:
+            html: true
+        failed_validation: HTTP_BAD_REQUEST
+        default_engine: twig
+
+sensio_framework_extra:
+    router:  { annotations: true }
+    request: { converters: true }
+    view:    { annotations: false } #fos_rest view_response_listener uses the view listener
+    cache:   { annotations: true }

@@ -1,0 +1,57 @@
+
+sonata_admin:
+    title:      %app_name% Admin
+    # title_logo: /bundles/acmedemo/fancy_acme_logo.png
+
+sonata_media:
+    # if you don't use default namespace configuration
+    class:
+        media:  Application\Sonata\MediaBundle\Document\Media
+        gallery:  Application\Sonata\MediaBundle\Document\Gallery
+        gallery_has_media: Application\Sonata\MediaBundle\Document\GalleryHasMedia
+    default_context: default
+    db_driver: doctrine_mongodb
+    providers:
+        image:
+            resizer: sonata.media.resizer.square
+            filesystem: sonata.media.filesystem.%sonata_media_fs%
+    contexts:
+        default:  # the default context is mandatory
+            providers:
+                - sonata.media.provider.dailymotion
+                - sonata.media.provider.youtube
+                - sonata.media.provider.image
+                - sonata.media.provider.file
+
+            formats:
+                small: { width: 100 , quality: 70}
+                big:   { width: 500 , quality: 70}
+        team_icon:  # the default context is mandatory
+                providers:
+                    - sonata.media.provider.image
+
+                formats:
+                    big: { width: 134 , quality: 100}
+                    small: { width: 60 , quality: 100}
+
+    cdn:
+        server:
+            path: %sonata_media_cdn%
+
+    filesystem:
+        local:
+            directory:  %kernel.root_dir%/../web/uploads/media
+            create:     false
+        s3:
+            bucket:    %bucket_name%
+            accessKey: %bucket_access_key%
+            secretKey: %bucket_secret_key%
+            create:    true
+
+sonata_block:
+    default_contexts: [cms]
+    blocks:
+        # Enable the SonataAdminBundle block
+        sonata.admin.block.admin_list:
+            contexts:   [admin]
+

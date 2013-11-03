@@ -1,0 +1,70 @@
+{
+    "name": "symfony/framework-standard-edition",
+    "license": "proprietary",
+    "type": "project",
+    "description": "The \"Symfony Standard Edition\" distribution",
+    "author": "Delorme Adrien",
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "require": {
+        "php": ">=5.3.3",
+        "symfony/symfony": "2.3.*",
+        "doctrine/orm": ">=2.2.3,<2.4-dev",
+        "doctrine/doctrine-bundle": "1.2.*",
+        "doctrine/mongodb-odm": "1.0.*@dev",
+        "doctrine/mongodb-odm-bundle": "3.0.*@dev",
+        "twig/extensions": "1.0.*",
+        "symfony/assetic-bundle": "2.3.*",
+        "symfony/swiftmailer-bundle": "2.3.*",
+        "symfony/monolog-bundle": "2.3.*",
+        "sensio/distribution-bundle": "2.3.*",
+        "sensio/framework-extra-bundle": "2.3.*",
+        "sensio/generator-bundle": "2.3.*",
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/rest-bundle": "0.13.*@dev",
+        "friendsofsymfony/rest": "0.8.*@dev",
+        "jms/security-extra-bundle": "1.5.*",
+        "jms/serializer-bundle": "0.12.*@dev",
+        "mopa/bootstrap-bundle": "v3.0.0-beta2",
+        "twbs/bootstrap": "v3.0.0",
+        "sonata-project/admin-bundle": "dev-master",
+        "sonata-project/doctrine-mongodb-admin-bundle": "dev-master",
+        "sonata-project/media-bundle": "dev-master",
+        "amazonwebservices/aws-sdk-for-php": "*",
+        "doctrine/doctrine-fixtures-bundle": "dev-master",
+        "components/font-awesome": "3.2.*@dev",
+        "ekino/newrelic-bundle": "dev-master",
+        "antimattr/google-bundle": "dev-master"
+    },
+    "scripts": {
+        "post-install-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+        ],
+        "post-update-cmd": [
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Mopa\\Bundle\\BootstrapBundle\\Composer\\ScriptHandler::postInstallSymlinkTwitterBootstrap"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin",
+        "component-dir": "web/vendor/"
+    },
+    "minimum-stability": "stable",
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "branch-alias": {
+            "dev-master": "2.3-dev"
+        }
+    }
+}

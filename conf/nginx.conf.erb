@@ -1,0 +1,74 @@
+# setting worker_processes to CPU core count
+worker_processes      1;
+daemon off;
+
+events {
+  worker_connections  1024;
+}
+
+http {
+
+	##
+	# Basic Settings
+	##
+
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	# server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+	include mime.types;
+	default_type application/octet-stream;
+
+
+	##
+	# Gzip Settings
+	##
+
+	gzip on;
+	gzip_disable "msie6";
+
+	# gzip_vary on;
+	# gzip_proxied any;
+	gzip_comp_level 3;
+	# gzip_buffers 16 8k;
+	gzip_http_version 1.1;
+	gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ##
+	# Logging Settings
+	##
+
+        access_log          off;
+	#access_log         logs/nginx/access.log;
+        error_log           /app/app/logs/error.log;
+
+	##
+	# Heroku specific settings
+	##
+
+        server_tokens       off;
+        proxy_max_temp_file_size	0;
+        #fastcgi_max_temp_file_size	0;
+        limit_conn_zone $binary_remote_addr zone=phplimit:1m; # define a limit bucket for PHP-FPM
+        # don't use server listen port in redirects.
+        port_in_redirect off;
+
+
+        # set $https only when SSL is actually used.
+        #map $http_x_forwarded_proto $my_https {
+        #  default off;
+        #  https on;
+        #}
+
+        upstream phpfcgi {
+          server unix:/tmp/php-fpm.socket;
+        }
+
+        include /app/conf/nginx.d/*.conf;
+}

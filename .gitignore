@@ -1,0 +1,31 @@
+# Bootstrap
+app/bootstrap*
+
+# Symfony ignores
+vendor/*
+*/logs/*
+*/data/*
+*/cache/*
+web/uploads/*
+web/bundles/*
+/web/js/*
+/web/css/*
+/app/bootstrap*
+web/*
+#composer.lock
+
+# Configuration files
+app/config/parameters.ini
+app/config/parameters.yml
+.rsync_cache
+/nbproject/private/
+
+.project
+*~
+app/config/config.yml
+app/bootstrap.php.cache
+web/config.php
+bin/security-checker
+.env
+.DS_Store
+dump

@@ -1,0 +1,7 @@
+
+imports:
+    - { resource: bundles/doctrine.yml }
+    - { resource: bundles/fos.yml }
+    - { resource: bundles/sonata.yml }
+    - { resource: bundles/ekino.yml }
+    - { resource: bundles/antimattr.yml }

@@ -1,0 +1,53 @@
+<%
+require 'uri'
+primary_mongo  = URI(ENV['MONGOHQ_URL'])
+secondary_mongo = URI(ENV['MONGOHQ_URL'])
+primary_mongo.path[0] = ''
+secondary_mongo.path[0] = ''
+%>
+parameters:
+    app_name            : <%= ENV['APP_NAME'] || '"Anon Hex"' %>
+
+    domain              : <%= ENV['DOMAIN'] %>
+    mail_domain         : <%= ENV['DOMAIN'] %>
+
+    mailer_transport    : smtp
+    mailer_host         : smtp.mandrillapp.com
+    mailer_port         : 587
+    mailer_user         : <%= ENV['MANDRILL_USERNAME'] %>
+    mailer_password     : <%= ENV['MANDRILL_APIKEY'] %>
+    locale              : <%= ENV['LOCALE'] %>
+    secret              : <%= ENV['SECRET'] %>
+    new_relic_license   : <%= ENV['NEW_RELIC_LICENSE_KEY'] %>
+
+    bucket_name         : <%= ENV['BUCKET_NAME'] %>
+    bucket_access_key   : <%= ENV['BUCKET_ACCESS_KEY'] %>
+    bucket_secret_key   : <%= ENV['BUCKET_SECRET_KEY'] %>
+    bucket_url          : <%= ENV['BUCKET_URL'] %>
+
+    sonata_media_fs     : s3
+    sonata_media_cdn    : http://<%= ENV['BUCKET_NAME'] %>.s3.amazonaws.com    
+
+#Mongo Db
+    mongodb_connections:
+      default:
+        server: <%= primary_mongo.scheme%>://<%= primary_mongo.host %>:<%= primary_mongo.port %>/<%= primary_mongo.path %>
+        options:
+          connect: true
+          username:             <%= primary_mongo.user %>
+          password:             <%= primary_mongo.password %>
+      auxiliary:
+        server: <%= secondary_mongo.scheme%>://<%= secondary_mongo.host %>:<%= secondary_mongo.port %><%= primary_mongo.path %>
+        options:
+          connect: true
+          username:             <%= secondary_mongo.user %>
+          password:             <%= secondary_mongo.password %>
+    mongodb_document_managers:
+      default:
+        auto_mapping:   true
+        connection:     default
+        database:       <%= primary_mongo.path %>
+
+      auxiliary:
+        connection: auxiliary
+        database:   <%= secondary_mongo.path %>
